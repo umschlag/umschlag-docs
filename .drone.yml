@@ -2,7 +2,7 @@ pipeline:
   build:
     image: webhippie/alpine:latest
     commands:
-      - apk -U add hugo@testing
+      - apk -U add git hugo@testing
       - hugo
       - git remote add website https://github.com/umschlag/umschlag.github.com.git
 
