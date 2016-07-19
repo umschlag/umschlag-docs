@@ -1,0 +1,8 @@
+pipeline:
+  build:
+    image: webhippie/alpine:latest
+    commands:
+      - apk -U add hugo@testing
+      - hugo
+
+  # TODO: Push to master @ github.com/harborapp/harborapp.github.com
