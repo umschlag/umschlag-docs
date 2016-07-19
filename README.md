@@ -1,12 +1,16 @@
-# Harbor: Website
+# Umschlag: Website
 
-[![Build Status](http://github.dronehippie.de/api/badges/harborapp/harborapp.github.com/status.svg)](http://github.dronehippie.de/harborapp/harborapp.github.com)
-[![Join the chat at https://gitter.im/harborapp/harborapp.github.com](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/harborapp/harborapp.github.com)
+[![Build Status](http://github.dronehippie.de/api/badges/umschlag/umschlag-docs/status.svg)](http://github.dronehippie.de/umschlag/umschlag-docs)
+[![Join the chat at https://gitter.im/umschlag/umschlag](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/umschlag/umschlag)
 
 **This project is under heavy development, it's not in a working state yet!**
 
-Documentation for the Harbor API and the command line client, you can find this
-website at [harborapp.gitghub.com](https://harborapp.github.com).
+Where does this name come from or what does it mean? It's quite simple, it's one
+german word for transshipment, I thought it's a good match as it is related to
+containers and a harbor.
+
+Documentation for the Umschlag API and the command line client, you can find this
+website at [umschlag.gitghub.com](https://umschlag.github.com).
 
 
 ## Install

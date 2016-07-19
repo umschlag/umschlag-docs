@@ -5,4 +5,4 @@ pipeline:
       - apk -U add hugo@testing
       - hugo
 
-  # TODO: Push to master @ github.com/harborapp/harborapp.github.com
+  # TODO: Push to master @ github.com/umschlag/umschlag.github.com
