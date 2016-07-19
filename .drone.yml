@@ -2,8 +2,13 @@ pipeline:
   build:
     image: webhippie/alpine:latest
     commands:
-      - apk -U add git hugo@testing
+      - apk -U add hugo@testing
       - hugo
+
+  remote:
+    image: webhippie/alpine:latest
+    commands:
+      - apk -U add git
       - git remote add website https://github.com/umschlag/umschlag.github.com.git
 
   # TODO: Push to master @ github.com/umschlag/umschlag.github.com
