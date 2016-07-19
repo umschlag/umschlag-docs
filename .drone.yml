@@ -4,5 +4,6 @@ pipeline:
     commands:
       - apk -U add hugo@testing
       - hugo
+      - git remote add website https://github.com/umschlag/umschlag.github.com.git
 
   # TODO: Push to master @ github.com/umschlag/umschlag.github.com
