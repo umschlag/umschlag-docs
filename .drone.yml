@@ -5,10 +5,16 @@ pipeline:
       - apk -U add hugo@testing
       - hugo
 
-  remote:
-    image: webhippie/alpine:latest
-    commands:
-      - apk -U add git
-      - git remote add website https://github.com/umschlag/umschlag.github.com.git
+      - cp -rf public /drone/public
+      - rm -rf * .lgtm .gitignore .github .drone*
+      - cp -rf /drone/public/* .
 
-  # TODO: Push to master @ github.com/umschlag/umschlag.github.com
+  publish:
+    image: umschlag/git-push
+    branch: master
+    remote: https://github.com/umschlag/umschlag.github.com.git
+    force: true
+    commit: true
+    when:
+      event: push
+      branch: master
