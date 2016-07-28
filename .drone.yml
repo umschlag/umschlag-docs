@@ -6,7 +6,7 @@ pipeline:
       - hugo --cleanDestinationDir
 
   publish:
-    image: drone-community/pubstorm
+    image: dronecommunity/pubstorm
     when:
       event: push
       branch: master
