@@ -10,7 +10,7 @@ german word for transshipment, I thought it's a good match as it is related to
 containers and a harbor.
 
 Documentation for the Umschlag API and the command line client, you can find this
-website at [umschlag.gitghub.com](https://umschlag.github.com).
+website at [umschlag.webhippie.de](https://umschlag.webhippie.de).
 
 
 ## Hosting
