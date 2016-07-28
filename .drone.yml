@@ -3,18 +3,10 @@ pipeline:
     image: webhippie/alpine:latest
     commands:
       - apk -U add hugo@testing
-      - hugo
-
-      - cp -rf public /drone/public
-      - rm -rf * .lgtm .gitignore .github .drone*
-      - cp -rf /drone/public/* .
+      - hugo --cleanDestinationDir
 
   publish:
-    image: umschlag/git-push
-    branch: master
-    remote: https://github.com/umschlag/umschlag.github.com.git
-    force: true
-    commit: true
+    image: drone-community/pubstorm
     when:
       event: push
       branch: master

@@ -13,6 +13,13 @@ Documentation for the Umschlag API and the command line client, you can find thi
 website at [umschlag.gitghub.com](https://umschlag.github.com).
 
 
+## Hosting
+
+The website is hosted on [Pubstorm](https://www.pubstorm.com/), an awesome free
+hosting platform made for developers. The website gets automcatically updated
+on every push to the `master` branch.
+
+
 ## Install
 
 This website uses the [Hugo](https://github.com/spf13/hugo) static site
