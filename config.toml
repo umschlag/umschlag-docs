@@ -1,4 +1,4 @@
-baseurl = "http://umschlag.webhippie.de/"
+baseurl = "https://umschlag.webhippie.de/"
 languageCode = "en-us"
 title = "Umschlag"
 disableRSS = true
