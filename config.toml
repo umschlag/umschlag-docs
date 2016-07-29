@@ -2,3 +2,11 @@ baseurl = "http://umschlag.webhippie.de/"
 languageCode = "en-us"
 title = "Umschlag"
 disableRSS = true
+
+[params]
+  Description = "A docker distribution management system"
+  Author = "Umschlag Team"
+  Website = "https://umschlag.webhippie.de"
+
+[social]
+  Github = "umschlag"
