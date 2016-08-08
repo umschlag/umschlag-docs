@@ -11,5 +11,25 @@ pipeline:
       event: push
       branch: master
 
+  docker:
+    image: plugins/docker
+    storage_driver: overlay
+    debug: true
+    repo: umschlag/umschlag-docs
+    tags: [ '${TAG}' ]
+    when:
+      event: tag
+      branch: refs/tags/*
+
+  docker:
+    image: plugins/docker
+    storage_driver: overlay
+    debug: true
+    repo: umschlag/umschlag-docs
+    tags: [ 'latest' ]
+    when:
+      event: push
+      branch: master
+
   # gitter:
   #   image: plugins/gitter

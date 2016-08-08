@@ -1,6 +1,7 @@
 # Umschlag: Documentation
 
 [![Build Status](http://github.dronehippie.de/api/badges/umschlag/umschlag-docs/status.svg)](http://github.dronehippie.de/umschlag/umschlag-docs)
+[![](https://images.microbadger.com/badges/image/umschlag/umschlag-docs.svg)](http://microbadger.com/images/umschlag/umschlag-docs "Get your own image badge on microbadger.com")
 [![Join the chat at https://gitter.im/umschlag/umschlag](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/umschlag/umschlag)
 
 **This project is under heavy development, it's not in a working state yet!**

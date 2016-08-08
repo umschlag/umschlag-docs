@@ -14,13 +14,14 @@
       <meta name="author" content="{{ . }}">
     {{ end }}
 
+    <base href="{{ .Site.BaseURL }}">
     <link rel="canonical" href="{{ .Permalink }}">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
-    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 
     {{ with .RSSlink }}
     <link href="{{ . }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />
@@ -31,6 +32,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css" />
 
-    <link rel="stylesheet" href="/styles/docs.css" />
+    <link rel="stylesheet" href="styles/docs.css" />
   </head>
   <body>

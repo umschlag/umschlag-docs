@@ -5,6 +5,7 @@ html {
 
 body {
   margin-bottom: 40px;
+  cursor: default;
 }
 
 body > .container {
