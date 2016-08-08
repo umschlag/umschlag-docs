@@ -31,5 +31,5 @@ pipeline:
       event: push
       branch: master
 
-  # gitter:
-  #   image: plugins/gitter
+  gitter:
+    image: umschlag/gitter
