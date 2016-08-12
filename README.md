@@ -21,13 +21,7 @@ hosting platform made for developers. The website gets automcatically updated
 on every push to the `master` branch.
 
 If you want to host the docs on your own you can take our docker image
-`umschlag/umschlag-docs`. Per default it will server from the document root
-`/`, but you can customize it if you provide the environment variable
-`UMSCHLAG_ROOT`, don't forget the trailing slash:
-
-```
-docker run -d --name umschlag-docs -e UMSCHLAG_ROOT=/docs/ -p 8080:80 umschlag/umschlag-docs
-```
+[umschlag/umschlag-docs](https://hub.docker.com/r/umschlag/umschlag-docs/).
 
 
 ## Install

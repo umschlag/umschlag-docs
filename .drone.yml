@@ -13,8 +13,6 @@ pipeline:
 
   docker:
     image: plugins/docker
-    storage_driver: overlay
-    debug: true
     repo: umschlag/umschlag-docs
     tags: [ '${TAG}' ]
     when:
@@ -23,8 +21,6 @@ pipeline:
 
   docker:
     image: plugins/docker
-    storage_driver: overlay
-    debug: true
     repo: umschlag/umschlag-docs
     tags: [ 'latest' ]
     when:
