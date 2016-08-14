@@ -3,9 +3,8 @@ workspace:
 
 pipeline:
   build:
-    image: webhippie/alpine:latest
+    image: webhippie/hugo:latest
     commands:
-      - apk -U add hugo@testing
       - hugo --cleanDestinationDir
 
   checks:
