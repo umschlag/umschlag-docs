@@ -6,10 +6,9 @@ pipeline:
       - hugo --cleanDestinationDir
 
   checks:
-    image: webhippie/nodejs:latest
+    image: webhippie/linkchecker:latest
     commands:
-      - npm install broken-link-checker -g
-      - blc -r http://localhost:8080
+      - linkchecker -v http://localhost:8080
 
   publish:
     image: dronecommunity/pubstorm
