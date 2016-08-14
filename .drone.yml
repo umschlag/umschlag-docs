@@ -5,6 +5,12 @@ pipeline:
       - apk -U add hugo@testing
       - hugo --cleanDestinationDir
 
+  checks:
+    image: webhippie/nodejs:latest
+    commands:
+      - npm install broken-link-checker -g
+      - blc -r http://localhost:8080
+
   publish:
     image: dronecommunity/pubstorm
     when:
@@ -29,3 +35,8 @@ pipeline:
 
   gitter:
     image: umschlag/gitter
+
+services:
+  server:
+    image: webhippie/caddy:latest
+    command: [/usr/sbin/caddy, -port, 8080, -root, /drone/src/public]
