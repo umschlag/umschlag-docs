@@ -1,3 +1,6 @@
+workspace:
+  path: src
+
 pipeline:
   build:
     image: webhippie/alpine:latest
