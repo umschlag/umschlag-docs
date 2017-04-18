@@ -5,21 +5,11 @@ pipeline:
   build:
     image: webhippie/hugo:latest
     commands:
-      - hugo --cleanDestinationDir
-
-  checks:
-    image: webhippie/linkchecker:latest
-    commands:
-      - linkchecker -v http://localhost:8080
-
-  publish:
-    image: dronecommunity/pubstorm
-    when:
-      event: push
-      branch: master
+      - make build
 
   docker:
     image: plugins/docker
+    secrets: [ docker_username, docker_password ]
     repo: umschlag/umschlag-docs
     tags: [ '${TAG}' ]
     when:
@@ -28,6 +18,7 @@ pipeline:
 
   docker:
     image: plugins/docker
+    secrets: [ docker_username, docker_password ]
     repo: umschlag/umschlag-docs
     tags: [ 'latest' ]
     when:
@@ -35,9 +26,5 @@ pipeline:
       branch: master
 
   gitter:
-    image: umschlag/gitter
-
-services:
-  server:
-    image: webhippie/caddy:latest
-    command: [/usr/sbin/caddy, -port, 8080, -root, /drone/src/public]
+    image: plugins/gitter
+    secrets: [ gitter_webhook ]

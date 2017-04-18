@@ -1,11 +1,7 @@
-FROM alpine:edge
+FROM webhippie/caddy:latest
+MAINTAINER Thomas Boerger <thomas@webhippie.de>
 
-RUN apk update && \
-  apk add \
-    caddy \
-    mailcap && \
-  rm -rf \
-    /var/cache/apk/*
+EXPOSE 8080
 
-CMD ["/usr/sbin/caddy", "-port", "80", "-root", "/srv/www"]
 ADD public /srv/www
+RUN chown -R caddy:caddy /srv/www
