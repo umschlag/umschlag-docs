@@ -7,6 +7,4 @@ disableRSS = true
   Description = "A docker distribution management system"
   Author = "Umschlag Team"
   Website = "https://umschlag.webhippie.de"
-
-[social]
   Github = "umschlag"

@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-    <title>{{ .Site.Title }}</title>
-    <script>window.location = "{{ .Site.BaseURL }}usage/overview"</script>
+	<head>
+		<title>
+			{{ .Site.Title }}
+		</title>
 
-    {{ .Hugo.Generator }}
-  </head>
-  <body>
-    <h1>
-      <a href="{{ .Site.BaseURL }}usage/overview">
-        Please go to the documentation!
-      </a>
-    </h1>
-  </body>
+		<script>
+			window.location = "{{ .Site.BaseURL }}usage/overview"
+		</script>
+
+		{{ .Hugo.Generator }}
+	</head>
+	<body>
+		<h1>
+			<a href="{{ .Site.BaseURL }}usage/overview">
+				Please go to the documentation!
+			</a>
+		</h1>
+	</body>
 </html>
