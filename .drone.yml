@@ -8,7 +8,8 @@ pipeline:
       - make build
 
   docker:
-    image: plugins/docker
+    image: plugins/docker:17.05
+    pull: true
     secrets: [ docker_username, docker_password ]
     repo: umschlag/umschlag-docs
     tags: [ '${TAG}' ]
@@ -17,7 +18,8 @@ pipeline:
       branch: refs/tags/*
 
   docker:
-    image: plugins/docker
+    image: plugins/docker:17.05
+    pull: true
     secrets: [ docker_username, docker_password ]
     repo: umschlag/umschlag-docs
     tags: [ 'latest' ]
@@ -26,5 +28,9 @@ pipeline:
       branch: master
 
   gitter:
-    image: plugins/gitter
+    image: plugins/gitter:1
+    pull: true
     secrets: [ gitter_webhook ]
+    when:
+      local: false
+      status: [ success, failure ]
