@@ -7,47 +7,34 @@
 
 **This project is under heavy development, it's not in a working state yet!**
 
-Where does this name come from or what does it mean? It's quite simple, it's one
-german word for transshipment, I thought it's a good match as it is related to
-containers and a harbor.
+Where does this name come from or what does it mean? It's quite simple, it's one german word for transshipment, I thought it's a good match as it is related to containers and a harbor.
 
-Documentation for the Umschlag API and the command line client, you can find this
-website at [umschlag.webhippie.de](https://umschlag.webhippie.de).
+Documentation for the Umschlag API and the command line client, you can find this website at [umschlag.webhippie.de](https://umschlag.webhippie.de).
 
 
 ## Hosting
 
-The website is hosted on infrastructure sponsored by
-[Webhippie](https://webhippie.de), the Docker container just gets launched on
-the Swarm cluster. The website gets automcatically updated on every push to the
-`master` branch.
+The website is hosted on infrastructure sponsored by [Webhippie](https://webhippie.de), the Docker container just gets launched on the Swarm cluster. The website gets automcatically updated on every push to the `master` branch.
 
-If you want to host the docs on your own you can take our docker image
-[umschlag/umschlag-docs](https://hub.docker.com/r/umschlag/umschlag-docs/).
+If you want to host the docs on your own you can take our docker image [umschlag/umschlag-docs](https://hub.docker.com/r/umschlag/umschlag-docs/).
 
 
 ## Install
 
-This website uses the [Hugo](https://github.com/spf13/hugo) static site
-generator. If you are planning to contribute you'll want to download and install
-Hugo on your local machine.
+This website uses the [Hugo](https://github.com/spf13/hugo) static site generator. If you are planning to contribute you'll want to download and install Hugo on your local machine.
 
-The installation of Hugo is out of the scope of this document, so please take
-the [official install instructions](https://gohugo.io/overview/installing/) to
-get Hugo up and running.
+The installation of Hugo is out of the scope of this document, so please take the [official install instructions](https://gohugo.io/overview/installing/) to get Hugo up and running.
 
 
 ## Development
 
-To generate the website and serve it on [localhost:1313](http://localhost:1313)
-just execute this command and stop it with `Ctrl+C`:
+To generate the website and serve it on [localhost:1313](http://localhost:1313) just execute this command and stop it with `Ctrl+C`:
 
 ```
 make server
 ```
 
-When you are done with your changes just create a pull request, after merging
-the pull request the website will be updated automatically.
+When you are done with your changes just create a pull request, after merging the pull request the website will be updated automatically.
 
 
 ## Contributing

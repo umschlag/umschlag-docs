@@ -20,7 +20,7 @@
   "config": {},
   "scripts": {
     "clean": "rimraf static/",
-    "lint": "eslint src/",
+    "lint": "eslint assets/",
     "build": "NODE_ENV=production webpack -p",
     "watch": "NODE_ENV=development webpack -d -w"
   },

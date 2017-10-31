@@ -2,32 +2,92 @@ workspace:
   path: src
 
 pipeline:
-  build:
+  cache-restore:
+    image: plugins/s3-cache:1
+    pull: true
+    secrets: [ cache_s3_endpoint, cache_s3_access_key, cache_s3_secret_key ]
+    restore: true
+    when:
+      local: false
+
+  frontend-prepare:
+    image: webhippie/nodejs:latest
+    pull: true
+    commands:
+      - yarn install
+
+  frontend-lint:
+    image: webhippie/nodejs:latest
+    pull: true
+    commands:
+      - yarn run lint
+
+  frontend-build:
+    image: webhippie/nodejs:latest
+    pull: true
+    commands:
+      - yarn run build
+
+  website-build:
     image: webhippie/hugo:latest
+    pull: true
     commands:
       - make build
 
-  docker:
+  docker-publish:
     image: plugins/docker:17.05
     pull: true
     secrets: [ docker_username, docker_password ]
     repo: umschlag/umschlag-docs
-    tags: [ '${TAG}' ]
-    when:
-      event: tag
-      branch: refs/tags/*
-
-  docker:
-    image: plugins/docker:17.05
-    pull: true
-    secrets: [ docker_username, docker_password ]
-    repo: umschlag/umschlag-docs
-    tags: [ 'latest' ]
+    tags: [ latest ]
     when:
       event: push
       branch: master
 
-  gitter:
+  docker-publish:
+    image: plugins/docker:17.05
+    pull: true
+    secrets: [ docker_username, docker_password ]
+    repo: umschlag/umschlag-docs
+    auto_tag: true
+    when:
+      event: tag
+      branch: [ master ]
+
+  docker-microbadger:
+    image: plugins/webhook:1
+    pull: true
+    secrets:
+      - source: microbadger_token
+        target: plugin_urls
+    when:
+      event: [ push, tag ]
+      branch: [ master ]
+
+  cache-rebuild:
+    image: plugins/s3-cache:1
+    pull: true
+    secrets: [ cache_s3_endpoint, cache_s3_access_key, cache_s3_secret_key ]
+    rebuild: true
+    mount:
+      - node_modules
+    when:
+      local: false
+      event: [ push ]
+      branch: [ master ]
+
+  cache-flush:
+    image: plugins/s3-cache:1
+    pull: true
+    secrets: [ cache_s3_endpoint, cache_s3_access_key, cache_s3_secret_key ]
+    flush: true
+    flush_age: 14
+    when:
+      local: false
+      event: [ push ]
+      branch: [ master ]
+
+  notify-gitter:
     image: plugins/gitter:1
     pull: true
     secrets: [ gitter_webhook ]

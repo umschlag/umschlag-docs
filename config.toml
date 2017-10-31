@@ -1,7 +1,7 @@
 baseurl = "/"
 languageCode = "en-us"
 title = "Umschlag"
-disableRSS = true
+disableKinds = ["RSS"]
 
 [params]
   Description = "A docker distribution management system"
