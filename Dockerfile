@@ -3,5 +3,7 @@ MAINTAINER Thomas Boerger <thomas@webhippie.de>
 
 EXPOSE 8080
 
-ADD public /srv/www
+COPY docker/caddyfile.tmpl /etc/templates/
+COPY public /srv/www
+
 RUN chown -R caddy:caddy /srv/www

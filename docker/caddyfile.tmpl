@@ -1,0 +1,20 @@
+:8080
+root {{ envString "WEBROOT" }}
+
+redir 301 {
+  if {path} is /
+  / /usage/overview/
+}
+
+header / {
+  Content-Security-Policy "default-src 'self'"
+
+  X-Content-Type-Options "nosniff"
+  X-Frame-Options "SAMEORIGIN"
+  X-XSS-Protection "1; mode=block"
+
+  Referrer-Policy "same-origin"
+}
+
+log stdout
+errors stderr
