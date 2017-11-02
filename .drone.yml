@@ -28,7 +28,7 @@ pipeline:
     commands:
       - yarn run build
 
-  website-build:
+  backend-build:
     image: webhippie/hugo:latest
     pull: true
     commands:
