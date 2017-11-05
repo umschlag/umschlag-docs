@@ -1,4 +1,4 @@
-FROM webhippie/caddy:latest
+FROM webhippie/caddy:latest-arm64
 
 EXPOSE 8080
 

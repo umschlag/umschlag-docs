@@ -1,4 +1,4 @@
-FROM webhippie/caddy:latest
+FROM webhippie/caddy:latest-386
 
 EXPOSE 8080
 

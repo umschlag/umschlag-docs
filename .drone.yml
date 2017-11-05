@@ -34,25 +34,118 @@ pipeline:
     commands:
       - make build
 
-  docker-publish:
+  docker-amd64:
     image: plugins/docker:17.05
     pull: true
+    group: docker
     secrets: [ docker_username, docker_password ]
     repo: umschlag/umschlag-docs
     tags: [ latest ]
+    build_args:
+      - VERSION=master
     when:
       event: push
       branch: master
 
-  docker-publish:
+  # docker-386:
+  #   image: plugins/docker:17.05
+  #   pull: true
+  #   group: docker
+  #   secrets: [ docker_username, docker_password ]
+  #   repo: umschlag/umschlag-docs
+  #   dockerfile: Dockerfile.i386
+  #   tags: [ latest-386 ]
+  #   build_args:
+  #     - VERSION=master
+  #   when:
+  #     event: push
+  #     branch: master
+
+  # docker-arm:
+  #   image: plugins/docker:17.05
+  #   pull: true
+  #   group: docker
+  #   secrets: [ docker_username, docker_password ]
+  #   repo: umschlag/umschlag-docs
+  #   dockerfile: Dockerfile.arm
+  #   tags: [ latest-arm ]
+  #   build_args:
+  #     - VERSION=master
+  #   when:
+  #     event: push
+  #     branch: master
+
+  # docker-arm64:
+  #   image: plugins/docker:17.05
+  #   pull: true
+  #   group: docker
+  #   secrets: [ docker_username, docker_password ]
+  #   repo: umschlag/umschlag-docs
+  #   dockerfile: Dockerfile.arm64
+  #   tags: [ latest-arm64 ]
+  #   build_args:
+  #     - VERSION=master
+  #   when:
+  #     event: push
+  #     branch: master
+
+  docker-amd64:
     image: plugins/docker:17.05
     pull: true
+    group: docker
     secrets: [ docker_username, docker_password ]
     repo: umschlag/umschlag-docs
     auto_tag: true
+    build_args:
+      - VERSION=${DRONE_TAG##v}
     when:
       event: tag
       branch: [ master ]
+
+  # docker-386:
+  #   image: plugins/docker:17.05
+  #   pull: true
+  #   group: docker
+  #   secrets: [ docker_username, docker_password ]
+  #   repo: umschlag/umschlag-docs
+  #   dockerfile: Dockerfile.i386
+  #   auto_tag: true
+  #   auto_tag_suffix: i386
+  #   build_args:
+  #     - VERSION=${DRONE_TAG##v}
+  #   when:
+  #     event: tag
+  #     branch: [ master ]
+
+  # docker-arm:
+  #   image: plugins/docker:17.05
+  #   pull: true
+  #   group: docker
+  #   secrets: [ docker_username, docker_password ]
+  #   repo: umschlag/umschlag-docs
+  #   dockerfile: Dockerfile.arm
+  #   auto_tag: true
+  #   auto_tag_suffix: arm
+  #   build_args:
+  #     - VERSION=${DRONE_TAG##v}
+  #   when:
+  #     event: tag
+  #     branch: [ master ]
+
+  # docker-arm64:
+  #   image: plugins/docker:17.05
+  #   pull: true
+  #   group: docker
+  #   secrets: [ docker_username, docker_password ]
+  #   repo: umschlag/umschlag-docs
+  #   dockerfile: Dockerfile.arm64
+  #   auto_tag: true
+  #   auto_tag_suffix: arm64
+  #   build_args:
+  #     - VERSION=${DRONE_TAG##v}
+  #   when:
+  #     event: tag
+  #     branch: [ master ]
 
   docker-microbadger:
     image: plugins/webhook:1
@@ -62,7 +155,7 @@ pipeline:
         target: plugin_urls
     when:
       event: [ push, tag ]
-      branch: [ master ]
+      branch: [ master, release/* ]
 
   cache-rebuild:
     image: plugins/s3-cache:1
@@ -74,7 +167,7 @@ pipeline:
     when:
       local: false
       event: [ push ]
-      branch: [ master ]
+      branch: [ master, release/* ]
 
   cache-flush:
     image: plugins/s3-cache:1
@@ -85,7 +178,7 @@ pipeline:
     when:
       local: false
       event: [ push ]
-      branch: [ master ]
+      branch: [ master, release/* ]
 
   notify-gitter:
     image: plugins/gitter:1
