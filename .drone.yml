@@ -1,6 +1,9 @@
 workspace:
   path: src
 
+branches:
+  - master
+
 pipeline:
   cache-restore:
     image: plugins/s3-cache:1
@@ -158,7 +161,7 @@ pipeline:
         target: plugin_urls
     when:
       event: [ push, tag ]
-      branch: [ master, release/* ]
+      branch: [ master ]
 
   cache-rebuild:
     image: plugins/s3-cache:1
@@ -170,7 +173,7 @@ pipeline:
     when:
       local: false
       event: [ push ]
-      branch: [ master, release/* ]
+      branch: [ master ]
 
   cache-flush:
     image: plugins/s3-cache:1
@@ -181,7 +184,7 @@ pipeline:
     when:
       local: false
       event: [ push ]
-      branch: [ master, release/* ]
+      branch: [ master ]
 
   notify-gitter:
     image: plugins/gitter:1
