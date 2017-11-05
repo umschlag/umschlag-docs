@@ -19,18 +19,21 @@ pipeline:
   frontend-lint:
     image: webhippie/nodejs:latest
     pull: true
+    group: frontend
     commands:
       - yarn run lint
 
   frontend-build:
     image: webhippie/nodejs:latest
     pull: true
+    group: frontend
     commands:
       - yarn run build
 
   backend-build:
     image: webhippie/hugo:latest
     pull: true
+    group: backend
     commands:
       - make build
 
