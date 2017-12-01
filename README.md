@@ -2,10 +2,9 @@
 
 [![Build Status](http://github.dronehippie.de/api/badges/umschlag/umschlag-docs/status.svg)](http://github.dronehippie.de/umschlag/umschlag-docs)
 [![](https://images.microbadger.com/badges/image/umschlag/umschlag-docs.svg)](http://microbadger.com/images/umschlag/umschlag-docs "Get your own image badge on microbadger.com")
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3a29f0dfe7154054bdab7bff05e71c2d)](https://www.codacy.com/app/tboerger/umschlag-docs?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=umschlag/umschlag-docs&amp;utm_campaign=Badge_Grade)
 [![Join the chat at https://gitter.im/umschlag/umschlag](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/umschlag/umschlag)
 [![Stories in Ready](https://badge.waffle.io/umschlag/umschlag-api.svg?label=ready&title=Ready)](http://waffle.io/umschlag/umschlag-api)
-
-**This project is under heavy development, it's not in a working state yet!**
 
 Where does this name come from or what does it mean? It's quite simple, it's one german word for transshipment, I thought it's a good match as it is related to containers and a harbor.
 
@@ -14,7 +13,7 @@ Documentation for the Umschlag API and the command line client, you can find thi
 
 ## Hosting
 
-The website is hosted on infrastructure sponsored by [Webhippie](https://webhippie.de), the Docker container just gets launched on the Swarm cluster. The website gets automcatically updated on every push to the `master` branch.
+The website is hosted on infrastructure sponsored by [Webhippie](https://webhippie.de), the Docker container just gets launched on the Swarm cluster. The website gets automatically updated on every push to the `master` branch.
 
 If you want to host the docs on your own you can take our docker image [umschlag/umschlag-docs](https://hub.docker.com/r/umschlag/umschlag-docs/).
 
@@ -49,7 +48,7 @@ Fork -> Patch -> Push -> Pull Request
 
 ## License
 
-Apache-2.0
+CC-BY-SA-4.0
 
 
 ## Copyright

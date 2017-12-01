@@ -1,13 +1,27 @@
+# escape=`
+FROM microsoft/nanoserver:10.0.14393.1593 AS build
+
+RUN powershell -Command $ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue'; `
+  Invoke-WebRequest `
+    -Uri 'https://caddyserver.com/download/windows/amd64?license=personal' `
+    -OutFile 'caddy.zip'; `
+  Expand-Archive `
+    -Path caddy.zip `
+    -DestinationPath C:\ `
+    -Force;
+
 FROM microsoft/nanoserver:10.0.14393.1593
 
-LABEL maintainer="Thomas Boerger <thomas@webhippie.de>"
-LABEL org.label-schema.version=latest-windows
-LABEL org.label-schema.name="Umschlag Docs"
-LABEL org.label-schema.vendor="Thomas Boerger"
-LABEL org.label-schema.schema-version="1.0"
+LABEL maintainer="Thomas Boerger <thomas@webhippie.de>" \
+  org.label-schema.name="Umschlag Docs" \
+  org.label-schema.vendor="Thomas Boerger" \
+  org.label-schema.schema-version="1.0"
 
 EXPOSE 8080
 
-# TODO: Install and configure caddy
+COPY --from=build /caddy.exe /caddy.exe
 
-COPY public /umschlag
+COPY docker/caddy.conf /etc/
+COPY public /docs
+
+CMD ["\\caddy.exe", "-conf", "\\caddy.conf", "-root", "\\docs"]
