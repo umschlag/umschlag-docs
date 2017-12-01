@@ -29,7 +29,7 @@ build_script:
       docker build -f Dockerfile.windows -t umschlag/umschlag-docs:windows .
 test_script:
   - cmd: |
-      docker run --rm umschlag/umschlag-docs:windows \\caddy.exe -version
+      docker run --rm umschlag/umschlag-docs:windows caddy.exe -version
 deploy_script:
   - ps: |
       $ErrorActionPreference = 'Stop';
