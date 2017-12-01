@@ -23,10 +23,10 @@ build_script:
       make build
 
       docker pull microsoft/nanoserver:10.0.14393.1593
-      docker build -f Dockerfile.windows -t umschlag/umschlag-docs:latest-windows .
+      docker build -f Dockerfile.windows -t umschlag/umschlag-docs:windows .
 test_script:
   - cmd: |
-      docker run --rm umschlag/umschlag-docs:latest-windows --version
+      docker run --rm umschlag/umschlag-docs:windows --version
 deploy_script:
   - ps: |
       $ErrorActionPreference = 'Stop';
@@ -34,5 +34,5 @@ deploy_script:
         Write-Host Nothing to deploy.
       } else {
         docker login --username $env:DOCKER_USERNAME --password $env:DOCKER_PASSWORD
-        docker push umschlag/umschlag-docs:latest-windows
+        docker push umschlag/umschlag-docs:windows
       }
