@@ -13,6 +13,8 @@ install:
   - ps: |
       Install-Product node ''
   - cmd: |
+      choco install make
+  - cmd: |
       docker version
       go version
 build_script:
@@ -36,3 +38,10 @@ deploy_script:
         docker login --username $env:DOCKER_USERNAME --password $env:DOCKER_PASSWORD
         docker push umschlag/umschlag-docs:windows
       }
+
+notifications:
+  - provider: Webhook
+    url: https://webhooks.gitter.im/e/dc4f394dc42a1b4c7dda
+    on_build_success: true
+    on_build_failure: true
+    on_build_status_changed: true
