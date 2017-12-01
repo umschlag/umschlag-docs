@@ -1,10 +1,14 @@
 {
-    "extends": "vue",
-    "plugins": [],
-    "rules": {
-    },
-    "globals": {
-      "localStorage": true,
-      "window": true
-    }
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "globals": {
+    "localStorage": true,
+    "window": true
+  },
+  "parserOptions": {
+    "sourceType": "module"
+  }
 }

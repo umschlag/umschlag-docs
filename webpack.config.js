@@ -19,62 +19,81 @@ module.exports = {
 
   resolve: {
     extensions: [
-      '',
       '.js'
     ]
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js?$/,
         exclude: /node_modules/,
-        loader: 'babel',
-        query: {
-          presets: [
-            'es2015'
-          ]
-        }
+        use: [
+          "babel-loader"
+        ]
       },
       {
         test: /\.less$/,
-        loader: ExtractTextPlugin.extract(
-          'css?sourceMap!less?sourceMap'
-        )
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader',
+            'less-loader'
+          ]
+        })
       },
       {
         test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file?name=fonts/[name].[ext]&mimetype=application/font-woff'
+        loader: 'file-loader',
+        options: {
+          name: 'fonts/[name].[ext]',
+          mimetype: 'application/font-woff'
+        }
       },
       {
         test: /\.otf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file?name=fonts/[name].[ext]&mimetype=application/x-font-opentype'
+        loader: 'file-loader',
+        options: {
+          name: 'fonts/[name].[ext]',
+          mimetype: 'application/x-font-opentype'
+        }
       },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file?name=fonts/[name].[ext]&mimetype=image/svg+xml'
+        loader: 'file-loader',
+        options: {
+          name: 'fonts/[name].[ext]',
+          mimetype: 'image/svg+xml'
+        }
       },
       {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file?name=fonts/[name].[ext]&mimetype=application/octet-stream'
+        loader: 'file-loader',
+        options: {
+          name: 'fonts/[name].[ext]',
+          mimetype: 'application/octet-stream'
+        }
       },
       {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file?name=fonts/[name].[ext]&mimetype=application/vnd.ms-fontobject'
+        loader: 'file-loader',
+        options: {
+          name: 'fonts/[name].[ext]',
+          mimetype: 'application/vnd.ms-fontobject'
+        }
       }
     ]
   },
 
-  vue: {
-    loaders: {
-      css: ExtractTextPlugin.extract('css!less')
-    }
-  },
-
   plugins: [
-    new ExtractTextPlugin(
-      'styles/docs.css'
-    ),
+    new Webpack.ProvidePlugin({
+      'jQuery': 'jquery',
+      '$': 'jquery',
+      'Tether': 'tether'
+    }),
+    new ExtractTextPlugin({
+      filename: 'styles/docs.css'
+    }),
     new CopyWebpackPlugin([{
       from: 'assets/images',
       to: 'images'
@@ -83,9 +102,7 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify(
         process.env.NODE_ENV || 'development'
       )
-    }),
-    new Webpack.optimize.OccurenceOrderPlugin(),
-    new Webpack.optimize.DedupePlugin()
+    })
   ]
 }
 
@@ -94,9 +111,8 @@ if (process.env.NODE_ENV === 'production') {
 
   module.exports.plugins = (module.exports.plugins || []).concat([
     new Webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
+      sourceMap: true,
+      minimize: true,
       output: {
         semicolons: false
       }
