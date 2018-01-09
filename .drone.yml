@@ -1,5 +1,6 @@
 workspace:
-  path: src
+  base: /srv/app
+  path: src/github.com/umschlag/umschlag-docs
 
 branches:
   - master
@@ -47,6 +48,7 @@ pipeline:
     secrets: [ docker_username, docker_password ]
     repo: umschlag/umschlag-docs
     auto_tag: true
+    auto_tag_suffix: amd64
     when:
       event: [push, tag]
       branch: master
@@ -64,19 +66,6 @@ pipeline:
       event: [push, tag]
       branch: master
 
-  docker-arm:
-    image: plugins/docker:17.05
-    pull: true
-    group: docker
-    secrets: [ docker_username, docker_password ]
-    repo: umschlag/umschlag-docs
-    dockerfile: Dockerfile.arm
-    auto_tag: true
-    auto_tag_suffix: arm
-    when:
-      event: [push, tag]
-      branch: master
-
   docker-arm64:
     image: plugins/docker:17.05
     pull: true
@@ -90,6 +79,30 @@ pipeline:
       event: [push, tag]
       branch: master
 
+  docker-arm:
+    image: plugins/docker:17.05
+    pull: true
+    group: docker
+    secrets: [ docker_username, docker_password ]
+    repo: umschlag/umschlag-docs
+    dockerfile: Dockerfile.arm
+    auto_tag: true
+    auto_tag_suffix: arm
+    when:
+      event: [push, tag]
+      branch: master
+
+  docker-manifests:
+    image: plugins/manifest:1
+    pull: true
+    secrets: [ docker_username, docker_password ]
+    spec: manifest.yml
+    auto_tag: true
+    ignore_missing: true
+    when:
+      event: [ push, tag ]
+      branch: master
+
   docker-microbadger:
     image: plugins/webhook:1
     pull: true
@@ -98,7 +111,7 @@ pipeline:
         target: plugin_urls
     when:
       event: [ push, tag ]
-      branch: [ master ]
+      branch: master
 
   cache-rebuild:
     image: plugins/s3-cache:1
@@ -110,7 +123,7 @@ pipeline:
     when:
       local: false
       event: [ push ]
-      branch: [ master ]
+      branch: master
 
   cache-flush:
     image: plugins/s3-cache:1
@@ -121,12 +134,13 @@ pipeline:
     when:
       local: false
       event: [ push ]
-      branch: [ master ]
+      branch: master
 
-  notify-gitter:
-    image: plugins/gitter:1
+  notify-matrix:
+    image: plugins/matrix:1
     pull: true
-    secrets: [ gitter_webhook ]
+    secrets: [ matrix_roomid, matrix_username, matrix_password ]
     when:
       local: false
-      status: [ success, failure ]
+      events: [ push, tag ]
+      status: [ changed, failure ]

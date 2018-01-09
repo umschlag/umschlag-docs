@@ -14,3 +14,8 @@ server:
 .PHONY: build
 build:
 	hugo --cleanDestinationDir
+
+.PHONY: assets
+assets:
+	yarn install
+	yarn run build

@@ -21,7 +21,7 @@ EXPOSE 8080
 
 COPY --from=build /caddy.exe /caddy.exe
 
-COPY docker/caddy.conf /etc/
+COPY docker/caddy.conf /caddy.conf
 COPY public /docs
 
 CMD ["\\caddy.exe", "-conf", "\\caddy.conf", "-root", "\\docs"]
