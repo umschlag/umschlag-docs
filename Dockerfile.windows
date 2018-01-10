@@ -19,9 +19,9 @@ LABEL maintainer="Thomas Boerger <thomas@webhippie.de>" `
 
 EXPOSE 8080
 
-COPY --from=build /caddy.exe /caddy.exe
+COPY --from=build /caddy.exe c:\caddy.exe
 
-COPY docker/caddy.conf /caddy.conf
-COPY public /docs
+COPY docker/caddy.conf c:\caddy.conf
+COPY public c:\docs
 
-CMD ["\\caddy.exe", "-conf", "\\caddy.conf", "-root", "\\docs"]
+CMD ["c:\\caddy.exe", "-conf", "c:\\caddy.conf", "-root", "c:\\docs"]
