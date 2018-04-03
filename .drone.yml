@@ -41,74 +41,12 @@ pipeline:
     commands:
       - make build
 
-  docker-amd64:
-    image: plugins/docker:17.05
+  publish-netlify:
+    image: lucap/drone-netlify:latest
     pull: true
-    group: docker
-    secrets: [ docker_username, docker_password ]
-    repo: umschlag/umschlag-docs
-    auto_tag: true
-    auto_tag_suffix: amd64
-    when:
-      event: [push, tag]
-      branch: master
-
-  docker-i386:
-    image: plugins/docker:17.05
-    pull: true
-    group: docker
-    secrets: [ docker_username, docker_password ]
-    repo: umschlag/umschlag-docs
-    dockerfile: Dockerfile.i386
-    auto_tag: true
-    auto_tag_suffix: i386
-    when:
-      event: [push, tag]
-      branch: master
-
-  docker-arm64:
-    image: plugins/docker:17.05
-    pull: true
-    group: docker
-    secrets: [ docker_username, docker_password ]
-    repo: umschlag/umschlag-docs
-    dockerfile: Dockerfile.arm64
-    auto_tag: true
-    auto_tag_suffix: arm64
-    when:
-      event: [push, tag]
-      branch: master
-
-  docker-arm:
-    image: plugins/docker:17.05
-    pull: true
-    group: docker
-    secrets: [ docker_username, docker_password ]
-    repo: umschlag/umschlag-docs
-    dockerfile: Dockerfile.arm
-    auto_tag: true
-    auto_tag_suffix: arm
-    when:
-      event: [push, tag]
-      branch: master
-
-  docker-manifests:
-    image: plugins/manifest:1
-    pull: true
-    secrets: [ docker_username, docker_password ]
-    spec: manifest.yml
-    auto_tag: true
-    ignore_missing: true
-    when:
-      event: [ push, tag ]
-      branch: master
-
-  docker-microbadger:
-    image: plugins/webhook:1
-    pull: true
-    secrets:
-      - source: microbadger_token
-        target: plugin_urls
+    secrets: [ netlify_token ]
+    site_id: 75a2b3b5-f6f6-4885-9ece-4347c40bd65a
+    path: public/
     when:
       event: [ push, tag ]
       branch: master
