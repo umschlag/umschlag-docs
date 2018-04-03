@@ -97,6 +97,9 @@ module.exports = {
     new CopyWebpackPlugin([{
       from: 'assets/images',
       to: 'images'
+    }, {
+      from: 'assets/static',
+      to: ''
     }]),
     new Webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(
