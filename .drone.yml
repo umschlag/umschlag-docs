@@ -25,14 +25,14 @@ pipeline:
     pull: true
     group: frontend
     commands:
-      - yarn run lint
+      - yarn lint
 
   frontend-build:
     image: webhippie/nodejs:latest
     pull: true
     group: frontend
     commands:
-      - yarn run build
+      - yarn build
 
   backend-build:
     image: webhippie/hugo:latest
