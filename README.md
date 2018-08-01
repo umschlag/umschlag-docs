@@ -1,6 +1,6 @@
 # Umschlag: Documentation
 
-[![Build Status](http://github.dronehippie.de/api/badges/umschlag/umschlag-docs/status.svg)](http://github.dronehippie.de/umschlag/umschlag-docs)
+[![Build Status](http://drone.uschlag.tech/api/badges/umschlag/umschlag-docs/status.svg)](http://drone.uschlag.tech/umschlag/umschlag-docs)
 [![Stories in Ready](https://badge.waffle.io/umschlag/umschlag-api.svg?label=ready&title=Ready)](http://waffle.io/umschlag/umschlag-api)
 [![Join the Matrix chat at https://matrix.to/#/#umschlag:matrix.org](https://img.shields.io/badge/matrix-%23umschlag%3Amatrix.org-7bc9a4.svg)](https://matrix.to/#/#umschlag:matrix.org)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3a29f0dfe7154054bdab7bff05e71c2d)](https://www.codacy.com/app/umschlag/umschlag-docs?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=umschlag/umschlag-docs&amp;utm_campaign=Badge_Grade)
@@ -9,7 +9,7 @@
 
 Where does this name come from or what does it mean? It's quite simple, it's one german word for transshipment, I thought it's a good match as it is related to containers and a harbor.
 
-Documentation for the Umschlag API and the command line client, you can find this website at [umschlag.webhippie.de](https://umschlag.webhippie.de).
+Documentation for the Umschlag API and the command line client, you can find this website at [umschlag.tech](https://umschlag.tech).
 
 
 ## Hosting
