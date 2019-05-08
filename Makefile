@@ -18,4 +18,4 @@ build:
 .PHONY: assets
 assets:
 	yarn install
-	yarn run build
+	yarn build

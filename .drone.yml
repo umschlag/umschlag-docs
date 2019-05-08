@@ -1,84 +1,83 @@
-workspace:
-  base: /srv/app
-  path: src/github.com/umschlag/umschlag-docs
+---
+kind: pipeline
+name: testing
 
-branches:
-  - master
+platform:
+  os: linux
+  arch: amd64
 
-pipeline:
-  cache-restore:
-    image: plugins/s3-cache:1
-    pull: true
-    secrets: [ cache_s3_endpoint, cache_s3_access_key, cache_s3_secret_key ]
-    restore: true
-    when:
-      local: false
+steps:
+- name: prepare
+  image: webhippie/nodejs:latest
+  pull: always
+  commands:
+  - yarn install --frozen-lockfile
 
-  frontend-prepare:
-    image: webhippie/nodejs:latest
-    pull: true
-    commands:
-      - yarn install
+- name: lint
+  image: webhippie/nodejs:latest
+  pull: always
+  commands:
+  - yarn lint
+  depends_on:
+  - prepare
 
-  frontend-lint:
-    image: webhippie/nodejs:latest
-    pull: true
-    group: frontend
-    commands:
-      - yarn lint
+- name: build
+  image: webhippie/nodejs:latest
+  pull: always
+  commands:
+  - yarn build
+  depends_on:
+  - prepare
 
-  frontend-build:
-    image: webhippie/nodejs:latest
-    pull: true
-    group: frontend
-    commands:
-      - yarn build
+- name: hugo
+  image: webhippie/hugo:latest
+  pull: always
+  commands:
+  - make build
+  depends_on:
+  - lint
+  - build
 
-  backend-build:
-    image: webhippie/hugo:latest
-    pull: true
-    group: backend
-    commands:
-      - make build
-
-  publish-netlify:
-    image: lucap/drone-netlify:latest
-    pull: true
-    secrets: [ netlify_token ]
+- name: publish
+  image: lucap/drone-netlify:latest
+  pull: always
+  settings:
+    token:
+      from_secret: netlify_token
     site_id: 75a2b3b5-f6f6-4885-9ece-4347c40bd65a
     path: public/
-    when:
-      event: [ push, tag ]
-      branch: master
+  when:
+    event:
+      exclude:
+      - pull_request
+  depends_on:
+  - hugo
 
-  cache-rebuild:
-    image: plugins/s3-cache:1
-    pull: true
-    secrets: [ cache_s3_endpoint, cache_s3_access_key, cache_s3_secret_key ]
-    rebuild: true
-    mount:
-      - node_modules
-    when:
-      local: false
-      event: [ push ]
-      branch: master
+- name: notify
+  image: plugins/matrix:1
+  pull: always
+  settings:
+    username:
+      from_secret: matrix_username
+    password:
+      from_secret: matrix_password
+    roomid:
+      from_secret: matrix_roomid
+  when:
+    event:
+    - push
+    - tag
+    status:
+    - failure
+  depends_on:
+  - prepare
+  - lint
+  - build
+  - hugo
+  - publish
 
-  cache-flush:
-    image: plugins/s3-cache:1
-    pull: true
-    secrets: [ cache_s3_endpoint, cache_s3_access_key, cache_s3_secret_key ]
-    flush: true
-    flush_age: 14
-    when:
-      local: false
-      event: [ push ]
-      branch: master
-
-  notify-matrix:
-    image: plugins/matrix:1
-    pull: true
-    secrets: [ matrix_roomid, matrix_username, matrix_password ]
-    when:
-      local: false
-      event: [ push, tag ]
-      status: [ changed, failure ]
+trigger:
+  ref:
+  - refs/heads/master
+  - refs/tags/**
+  - refs/pull/**

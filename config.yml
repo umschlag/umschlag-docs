@@ -1,0 +1,15 @@
+baseurl: /
+languageCode: en-us
+title: Umschlag
+disableKinds: RSS
+
+outputs:
+  home:
+    - html
+    - json
+
+params:
+  Description: Docker distribution management system
+  Author: Umschlag Team
+  Website: https://umschlag.tech
+  Github: umschlag
