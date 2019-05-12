@@ -54,12 +54,11 @@
   "dependencies": {
     "bootstrap": "^4.3.1",
     "fuse.js": "^3.4.4",
+    "handlebars": "^4.1.2",
     "ionicons": "^4.5.6",
     "jquery": "^3.4.1",
     "mark.js": "^8.11.1",
-    "mustache": "^3.0.1",
-    "popper.js": "^1.15.0",
-    "query-string": "^6.5.0"
+    "popper.js": "^1.15.0"
   },
   "keywords": [
     "umschlag"
