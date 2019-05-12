@@ -1,35 +1,50 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-	<div class="container">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-				<span class="sr-only">Menu</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-
+<header>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container">
 			<a class="navbar-brand" href="{{ .Site.BaseURL }}">
 				{{ .Site.Title }}
 			</a>
-		</div>
 
-		<div id="navbar" class="collapse navbar-collapse">
-			<ul class="nav navbar-nav navbar-right">
-				{{ $currentNode := . }}{{ range .Site.Menus.main.ByWeight }}
-					<li class="{{if $currentNode.IsMenuCurrent "main" . }}active{{ end }}">
-						<a href="{{.URL}}">
-							{{ .Pre }}
-							{{ .Name }}
+			<button
+				class="navbar-toggler"
+				type="button"
+				data-toggle="collapse"
+				data-target="#navbar"
+				aria-controls="navbar"
+				aria-expanded="false"
+				aria-label="Menu">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="navbar-nav mr-auto">
+					{{ $currentNode := . }}{{ range .Site.Menus.main.ByWeight }}
+						<li class="nav-item {{if $currentNode.IsMenuCurrent "main" . }}active{{ end }}">
+							<a href="{{.URL}}" class="nav-link">
+								{{ .Pre }}
+								{{ .Name }}
+							</a>
+						</li>
+					{{ end }}
+					<li class="nav-item">
+						<a href="https://github.com/{{ .Site.Params.Github }}" class="nav-link">
+							<i class="ion-logo-github"></i>
+							Github
 						</a>
 					</li>
-				{{ end }}
-				<li>
-					<a href="https://github.com/{{ .Site.Params.Github }}">
-						<i class="fa fa-github"></i>
-						Github
-					</a>
-				</li>
-			</ul>
+				</ul>
+
+				<form action="{{ "search" | absURL }}" method="get" id="search" class="form-inline mt-2 mt-md-0">
+					<div class="input-group">
+						<input type="text" name="q" placeholder="Search" aria-label="Search" class="form-control">
+						<div class="input-group-append">
+							<button type="submit" class="btn btn-outline-secondary">
+								<i class="ion-md-search"></i>
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
 		</div>
-	</div>
-</nav>
+	</nav>
+</header>

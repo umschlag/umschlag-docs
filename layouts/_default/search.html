@@ -1,0 +1,58 @@
+{{ partial "header.html" . }}
+{{ partial "navbar.html" . }}
+
+<div class="container">
+	<div class="row">
+		<div class="col-lg-3 col-md-3 col-sm-4 sidebar-offcanvas" id="sidebar">
+			{{ partial "menu" . }}
+		</div>
+
+		<div class="col-lg-9 col-md-9 col-sm-8">
+			<h1 id="matches">
+				Matches
+			</h1>
+
+			<div id="results"></div>
+		</div>
+	</div>
+</div>
+
+<script id="template" type="x-tmpl-mustache">
+	{{"{{"}}#each matches{{"}}"}}
+		<div id="summary-{{"{{"}}@index{{"}}"}}">
+			<h2>
+				<a href="{{"{{"}}permalink{{"}}"}}">
+					{{"{{"}}title{{"}}"}}
+				</a>
+			</h2>
+
+			<p>
+				{{"{{"}}contents{{"}}"}}
+			</p>
+
+			{{"{{"}}#if tags{{"}}"}}
+				<ul class="tags">
+					{{"{{"}}#each tags{{"}}"}}
+						<li>
+							{{"{{"}}.{{"}}"}}
+						</li>
+					{{"{{"}}/each{{"}}"}}
+				</ul>
+			{{"{{"}}/if{{"}}"}}
+
+			{{"{{"}}#if categories{{"}}"}}
+				<ul class="categories">
+					{{"{{"}}#each categories{{"}}"}}
+						<li>
+							{{"{{"}}.{{"}}"}}
+						</li>
+					{{"{{"}}/each{{"}}"}}
+				</ul>
+			{{"{{"}}/if{{"}}"}}
+		</div>
+	{{"{{"}}else{{"}}"}}
+		<p>No matches found</p>
+	{{"{{"}}/each{{"}}"}}
+</script>
+
+{{ partial "footer.html" . }}
